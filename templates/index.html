@@ -3,12 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daily Brief · 每日新闻</title>
-<meta name="description" content="双语 AI/科技与综合新闻简报，每日更新">
+<title data-i18n="site_title">每日新闻 · Daily Brief</title>
+<meta name="description" content="每日双语新闻简报">
 <meta property="og:title" content="Daily Brief · 每日新闻">
-<meta property="og:description" content="双语 AI/科技与综合新闻简报，每日更新">
 <meta property="og:type" content="website">
-<meta property="og:image" content="og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -19,85 +17,107 @@ html{scroll-behavior:smooth}
 body{font-family:var(--font-sans);background:var(--gray-50);color:var(--gray-800);line-height:1.6;min-height:100vh}
 ::selection{background:var(--blue);color:#fff}
 .header{background:linear-gradient(135deg,var(--navy),var(--navy-light));color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(26,42,74,.3)}
-.header-inner{max-width:1200px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.header h1{font-size:22px;font-weight:700;display:flex;align-items:center;gap:8px}
-.header h1 svg{width:28px;height:28px}
-.header-badge{background:rgba(59,130,246,.3);backdrop-filter:blur(4px);padding:4px 12px;border-radius:20px;font-size:13px;color:var(--blue-light)}
-.toggle-wrap{display:flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,.7)}
-.toggle{cursor:pointer;width:40px;height:22px;background:rgba(255,255,255,.2);border-radius:11px;position:relative;transition:.2s;border:none;outline:none;flex-shrink:0}
+.header-inner{max-width:1200px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.header h1{font-size:20px;font-weight:700;display:flex;align-items:center;gap:8px;cursor:pointer}
+.header h1 svg{width:24px;height:24px}
+.header-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.lang-btn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;padding:3px 10px;border-radius:6px;font-size:12px;cursor:pointer;transition:.15s}
+.lang-btn:hover{background:rgba(255,255,255,.25)}
+.lang-btn.active{background:var(--blue);border-color:var(--blue)}
+.toggle-wrap{display:flex;align-items:center;gap:4px;font-size:13px;color:rgba(255,255,255,.7)}
+.toggle{cursor:pointer;width:36px;height:20px;background:rgba(255,255,255,.2);border-radius:10px;position:relative;transition:.2s;border:none;outline:none;flex-shrink:0}
 .toggle.active{background:var(--blue)}
-.toggle::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.2s}
-.toggle.active::after{left:20px}
-.date-info{background:#fff;border-bottom:1px solid var(--gray-200);position:sticky;top:56px;z-index:99}
-.date-info-inner{max-width:1200px;margin:0 auto;padding:10px 24px;font-size:14px;color:var(--gray-600);display:flex;align-items:center;gap:12px}
-.date-info-inner strong{color:var(--gray-800)}
-.filters{max-width:1200px;margin:20px auto 0;padding:0 24px;display:flex;gap:8px;flex-wrap:wrap}
-.filter-btn{padding:6px 18px;border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;border:1px solid var(--gray-200);background:#fff;color:var(--gray-600);transition:.15s}
+.toggle::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.2s}
+.toggle.active::after{left:18px}
+/* Trend Chart */
+.trend-section{max-width:1200px;margin:16px auto 0;padding:0 24px}
+.trend-card{background:#fff;border-radius:var(--radius);padding:16px 20px;box-shadow:var(--shadow)}
+.trend-card h3{font-size:14px;color:var(--navy);margin-bottom:12px;font-weight:600}
+#trendChart{width:100%;height:200px;display:block}
+.trend-legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px}
+.trend-legend-item{font-size:11px;cursor:pointer;display:flex;align-items:center;gap:4px;opacity:.7;transition:.15s}
+.trend-legend-item:hover{opacity:1}
+.trend-legend-item .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+/* Date Nav */
+.date-nav{background:#fff;border-bottom:1px solid var(--gray-200);position:sticky;top:52px;z-index:99}
+.date-nav-inner{max-width:1200px;margin:0 auto;padding:8px 24px;display:flex;align-items:center;gap:8px;overflow-x:auto}
+.date-nav-item{white-space:nowrap;padding:5px 14px;border-radius:16px;font-size:13px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--gray-500);flex-shrink:0;transition:.15s}
+.date-nav-item:hover{background:var(--gray-100);color:var(--gray-700)}
+.date-nav-item.active{background:var(--blue);color:#fff}
+/* Filters */
+.filters{max-width:1200px;margin:14px auto 0;padding:0 24px;display:flex;gap:6px;flex-wrap:wrap}
+.filter-btn{padding:5px 16px;border-radius:16px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--gray-200);background:#fff;color:var(--gray-600);transition:.15s}
 .filter-btn:hover{border-color:var(--blue);color:var(--blue)}
 .filter-btn.active{background:var(--blue);border-color:var(--blue);color:#fff}
-.filter-btn[data-cat-all].active{background:var(--navy);border-color:var(--navy);color:#fff}
-.container{max-width:1200px;margin:0 auto;padding:20px 24px 60px}
-.news-grid{display:grid;grid-template-columns:1fr;gap:20px}
+.update-info{max-width:1200px;margin:8px auto 0;padding:0 24px;font-size:11px;color:var(--gray-400)}
+/* Grid */
+.container{max-width:1200px;margin:0 auto;padding:16px 24px 40px}
+.news-grid{display:grid;grid-template-columns:1fr;gap:16px}
 @media(min-width:768px){.news-grid{grid-template-columns:1fr 1fr}}
 @media(min-width:1100px){.news-grid{grid-template-columns:1fr 1fr 1fr}}
 .card{background:#fff;border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:.2s;box-shadow:var(--shadow)}
 .card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
 .card-img-wrap{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:var(--gray-100);flex-shrink:0}
 .card-img-wrap img{width:100%;height:100%;object-fit:cover;display:block}
-.no-image{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px;color:var(--gray-300)}
-.card-video-badge{position:absolute;bottom:10px;left:10px;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);color:#fff;font-size:12px;padding:3px 10px;border-radius:6px}
-.card-source{position:absolute;top:10px;left:10px;background:rgba(255,255,255,.92);backdrop-filter:blur(4px);padding:2px 10px;border-radius:6px;font-size:11px;font-weight:600;color:var(--gray-600);display:flex;align-items:center;gap:4px}
-.card-source svg{width:14px;height:14px;border-radius:2px;flex-shrink:0}
-.card-body{padding:14px 16px 16px;flex:1;display:flex;flex-direction:column}
-.card-meta{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
-.card-category{padding:2px 10px;border-radius:4px;font-size:11px;font-weight:600}
+.card-img-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:36px;color:rgba(255,255,255,.7)}
+.card-video-badge{position:absolute;bottom:8px;left:8px;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);color:#fff;font-size:11px;padding:2px 8px;border-radius:5px}
+.card-source{position:absolute;top:8px;left:8px;background:rgba(255,255,255,.92);backdrop-filter:blur(4px);padding:2px 8px;border-radius:5px;font-size:10px;font-weight:600;color:var(--gray-600);display:flex;align-items:center;gap:4px}
+.card-source svg{width:12px;height:12px;border-radius:2px;flex-shrink:0}
+.card-body{padding:12px 14px 14px;flex:1;display:flex;flex-direction:column}
+.card-meta{display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap}
+.card-category{padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600}
 .cat-ai{background:#ede9fe;color:#6d28d9}
 .cat-tech{background:var(--blue-light);color:var(--blue-dark)}
 .cat-general{background:#fef3c7;color:#b45309}
 .cat-business{background:#d1fae5;color:#047857}
-.card-date{font-size:12px;color:var(--gray-500)}
-.card-title{font-size:16px;font-weight:600;line-height:1.4;margin-bottom:4px}
+.card-date{font-size:11px;color:var(--gray-500)}
+.card-title{font-size:15px;font-weight:600;line-height:1.4;margin-bottom:3px}
 .card-title a{color:var(--gray-900);text-decoration:none}
 .card-title a:hover{color:var(--blue)}
-.card-title-en{font-size:13px;color:var(--gray-500);margin-bottom:6px}
-.card-summary{font-size:13px;color:var(--gray-600);line-height:1.5;flex:1;margin-bottom:10px}
-.card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--gray-100)}
-.card-link{font-size:12px;color:var(--blue);text-decoration:none;font-weight:500}
+.card-title-en{font-size:12px;color:var(--gray-500);margin-bottom:5px}
+.card-summary{font-size:12px;color:var(--gray-600);line-height:1.5;flex:1;margin-bottom:8px}
+.card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:8px;border-top:1px solid var(--gray-100)}
+.card-link{font-size:11px;color:var(--blue);text-decoration:none;font-weight:500}
 .card-link:hover{color:var(--blue-dark)}
-.card-source-label{font-size:11px;color:var(--gray-400)}
-.section-title{font-size:18px;font-weight:700;color:var(--navy);margin:32px 0 16px;display:flex;align-items:center;gap:8px}
+.card-source-label{font-size:10px;color:var(--gray-400)}
+.section-title{font-size:16px;font-weight:700;color:var(--navy);margin:24px 0 12px;display:flex;align-items:center;gap:8px}
 .section-title::after{content:"";flex:1;height:1px;background:var(--gray-200)}
-.section-title .badge{background:var(--blue-light);color:var(--blue-dark);font-size:12px;padding:2px 10px;border-radius:12px}
-.site-footer{border-top:1px solid var(--gray-200);padding:32px 24px;text-align:center;font-size:13px;color:var(--gray-500)}
+.section-title .badge{background:var(--blue-light);color:var(--blue-dark);font-size:11px;padding:2px 8px;border-radius:10px}
+.site-footer{border-top:1px solid var(--gray-200);padding:24px;text-align:center;font-size:12px;color:var(--gray-500)}
 .site-footer p{margin:2px 0}
+/* Dark Mode */
 body.dark{background:#0f172a;color:var(--gray-100)}
 body.dark .header{background:linear-gradient(135deg,#0f172a,#1a2a4a)}
-body.dark .date-info{background:var(--gray-800);border-color:var(--gray-700)}
-body.dark .date-info-inner{color:var(--gray-400)}
-body.dark .date-info-inner strong{color:var(--gray-200)}
+body.dark .date-nav{background:var(--gray-800);border-color:var(--gray-700)}
+body.dark .date-nav-item{color:var(--gray-400)}
+body.dark .date-nav-item:hover{background:var(--gray-700);color:var(--gray-200)}
+body.dark .date-nav-item.active{background:var(--blue);color:#fff}
 body.dark .filter-btn{background:var(--gray-800);border-color:var(--gray-700);color:var(--gray-300)}
 body.dark .filter-btn:hover{border-color:var(--blue);color:var(--blue-light)}
 body.dark .filter-btn.active{background:var(--blue);border-color:var(--blue);color:#fff}
-body.dark .filter-btn[data-cat-all].active{background:var(--navy);border-color:var(--navy);color:#fff}
 body.dark .card{background:var(--gray-800)}
+body.dark .trend-card{background:var(--gray-800)}
+body.dark .trend-card h3{color:var(--blue-light)}
 body.dark .card-title a{color:var(--gray-100)}
 body.dark .card-title a:hover{color:var(--blue-light)}
 body.dark .card-summary{color:var(--gray-400)}
-body.dark .card-source{background:rgba(30,41,59,.92);color:var(--gray-300)}
+body.dark .card-source{background:rgba(30,41,59,.92)}
 body.dark .card-date{color:var(--gray-400)}
 body.dark .section-title{color:var(--blue-light)}
 body.dark .card-footer{border-color:var(--gray-700)}
 body.dark .site-footer{border-color:var(--gray-700);color:var(--gray-500)}
 body.dark .card-img-wrap{background:var(--gray-700)}
-body.dark .no-image{color:var(--gray-600)}
+body.dark .update-info{color:var(--gray-500)}
 @media(max-width:600px){
-.header-inner{padding:12px 16px}
-.header h1{font-size:18px}
-.header-badge{font-size:11px;padding:2px 10px}
-.date-info-inner{padding:8px 16px}
-.filters{padding:0 16px;margin:16px auto 0}
-.container{padding:12px 16px 40px}
-.card-title{font-size:15px}
+.header-inner{padding:10px 16px}
+.header h1{font-size:17px}
+.date-nav-inner{padding:6px 16px}
+.filters{padding:0 16px}
+.container{padding:12px 16px 32px}
+.trend-section{padding:0 16px}
+.trend-card{padding:12px 14px}
+#trendChart{height:160px}
+.card-title{font-size:14px}
 }
 </style>
 </head>
@@ -105,108 +125,294 @@ body.dark .no-image{color:var(--gray-600)}
 
 <header class="header">
 <div class="header-inner">
-<h1><svg viewBox="0 0 28 28" fill="none"><rect x="2" y="4" width="24" height="20" rx="3" stroke="#fff" stroke-width="2"/><path d="M8 10h12M8 14h10M8 18h8" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/></svg>Daily Brief</h1>
-<div style="display:flex;align-items:center;gap:12px">
-<span class="header-badge">每日双语新闻</span>
+<h1 onclick="scrollToTop()"><svg viewBox="0 0 28 28" fill="none"><rect x="2" y="4" width="24" height="20" rx="3" stroke="#fff" stroke-width="2"/><path d="M8 10h12M8 14h10M8 18h8" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/></svg><span data-i18n="site_title">每日新闻</span></h1>
+<div class="header-controls">
+<button class="lang-btn active" onclick="setLang('zh')" id="langZh">中</button>
+<button class="lang-btn" onclick="setLang('en')" id="langEn">EN</button>
 <div class="toggle-wrap"><span>&#x1f319;</span><button class="toggle" id="darkToggle"></button></div>
 </div>
 </div>
 </header>
 
-<div class="date-info">
-<div class="date-info-inner">
-<strong>&#x1f4c5; {{ today }}</strong>
-<span>| 更新于 {{ update_time }} · 共 {{ items|length }} 条</span>
+<div class="trend-section" id="trendSection">
+<div class="trend-card">
+<h3 data-i18n="trend_title">关键词趋势</h3>
+<canvas id="trendChart"></canvas>
+<div class="trend-legend" id="trendLegend"></div>
 </div>
 </div>
 
-<div class="filters">
-<button class="filter-btn active" data-cat-all onclick="filterAll()">全部</button>
+<nav class="date-nav">
+<div class="date-nav-inner" id="dateNav">
+{% for d in all_dates[:7] %}
+<button class="date-nav-item{% if d == today %} active{% endif %}" data-date="{{ d }}" onclick="loadDate('{{ d }}')">{{ d }}</button>
+{% endfor %}
+</div>
+</nav>
+
+<div class="filters" id="filterBar">
+<button class="filter-btn active" data-cat="all" onclick="filterCat('all')" data-i18n="filter_all">全部</button>
 <button class="filter-btn" data-cat="AI" onclick="filterCat('AI')">AI</button>
-<button class="filter-btn" data-cat="科技" onclick="filterCat('科技')">科技</button>
-<button class="filter-btn" data-cat="综合" onclick="filterCat('综合')">综合</button>
+<button class="filter-btn" data-cat="科技" onclick="filterCat('科技')" data-i18n="filter_tech">科技</button>
+<button class="filter-btn" data-cat="综合" onclick="filterCat('综合')" data-i18n="filter_general">综合</button>
 </div>
+<div class="update-info" id="updateInfo"><span data-i18n="updated">更新于</span> {{ update_time }}</div>
 
-<main class="container">
-
+<main class="container" id="newsContainer">
 {% for section in grouped %}
-<h2 class="section-title">{{ section.name }} <span class="badge">{{ section.articles|length }} 条</span></h2>
+<h2 class="section-title" data-section="{{ section.name }}">{{ section.name }} <span class="badge">{{ section.articles|length }} <span data-i18n="items_count">条</span></span></h2>
 <div class="news-grid" data-section="{{ section.name }}">
-
 {% for article in section.articles %}
-<article class="card" data-category="{{ article.category }}">
+<article class="card" data-category="{{ article.category }}" data-date="{{ today }}">
 <div class="card-img-wrap">
 {% if article.image_url %}
-<img src="{{ article.image_url }}" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<div class=no-image>&#x26A1;</div>'">
-{% elif article.source_id == 'hackernews' %}
-<div class="no-image" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;font-size:40px">Y</div>
-{% elif article.source_id == 'techcrunch' %}
-<div class="no-image" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff;font-size:40px">&#x25B6;</div>
-{% elif article.source_id == 'jiqizhixin' %}
-<div class="no-image" style="background:linear-gradient(135deg,#06b6d4,#0891b2);color:#fff;font-size:36px">机</div>
+<img src="{{ article.image_url }}" alt="" loading="lazy" onerror="this.parentElement.innerHTML=fallbackImg('{{ article.category }}')">
 {% else %}
-<div class="no-image" style="background:linear-gradient(135deg,#64748b,#475569);color:#fff;font-size:36px">R</div>
+{{ fallback_img(article.category)|safe }}
 {% endif %}
-{% if article.has_video %}<span class="card-video-badge">&#x25B6; 视频</span>{% endif %}
+{% if article.has_video %}<span class="card-video-badge">&#x25B6; <span data-i18n="video">视频</span></span>{% endif %}
 <span class="card-source">{{ source_logo(article.source_id)|safe }}{{ article.source }}</span>
 </div>
 <div class="card-body">
-<div class="card-meta">
-<span class="card-category {{ badges[article.category]['class'] }}">{{ article.category }}</span>
-{% if article.published %}<span class="card-date">{{ time_ago(article.published) }}</span>{% endif %}
-</div>
+<div class="card-meta"><span class="card-category {{ badges[article.category]['class'] }}">{{ article.category }}</span>{% if article.published %}<span class="card-date" data-iso="{{ article.published }}"></span>{% endif %}</div>
 <h3 class="card-title"><a href="{{ article.url }}" target="_blank" rel="noopener">{{ article.title }}</a></h3>
 {% if article.title_en and article.title_en != article.title %}
 <div class="card-title-en">{{ article.title_en }}</div>
 {% endif %}
 {% if article.summary %}<p class="card-summary">{{ article.summary }}</p>{% endif %}
-<div class="card-footer">
-<span class="card-source-label">via {{ article.source }}</span>
-<a href="{{ article.url }}" class="card-link" target="_blank" rel="noopener">阅读原文 &rarr;</a>
-</div>
+<div class="card-footer"><span class="card-source-label">via {{ article.source }}</span><a href="{{ article.url }}" class="card-link" target="_blank" rel="noopener"><span data-i18n="read_original">阅读原文</span> &rarr;</a></div>
 </div>
 </article>
 {% endfor %}
-
 </div>
 {% endfor %}
-
 </main>
 
 <footer class="site-footer">
-<p>Daily Brief &middot; 每日双语新闻 &middot; 每日自动更新</p>
-<p>数据来源: Hacker News &middot; TechCrunch &middot; Reuters &middot; 机器之心</p>
-<p style="margin-top:8px;font-size:12px;color:var(--gray-400)">{{ update_time }}</p>
+<p data-i18n="footer_desc">每日双语新闻 · 每日自动更新</p>
+<p data-i18n="footer_sources">数据来源: Hacker News · TechCrunch · Reuters · 机器之心</p>
 </footer>
 
 <script>
+// ===== i18n =====
+var I18N = {{ translations_json|safe }};
+var currentLang = localStorage.getItem("lang") || "zh";
+
+function t(key) { return I18N[currentLang] && I18N[currentLang][key] || key; }
+
+function applyLang() {
+  document.querySelectorAll("[data-i18n]").forEach(function(el) {
+    var key = el.getAttribute("data-i18n");
+    var text = t(key);
+    if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") { el.placeholder = text; }
+    else { el.textContent = text; }
+  });
+  document.documentElement.lang = currentLang === "zh" ? "zh-CN" : "en";
+  document.getElementById("langZh").className = "lang-btn" + (currentLang === "zh" ? " active" : "");
+  document.getElementById("langEn").className = "lang-btn" + (currentLang === "en" ? " active" : "");
+}
+
+function setLang(lang) { currentLang = lang; localStorage.setItem("lang", lang); applyLang(); updateDates(); }
+
+// ===== Dark Mode =====
 function toggleDark(){
-  var t=document.getElementById('darkToggle');
-  document.body.classList.toggle('dark');t.classList.toggle('active');
-  localStorage.setItem('dark',document.body.classList.contains('dark'))
+  var t=document.getElementById("darkToggle");
+  document.body.classList.toggle("dark");t.classList.toggle("active");
+  localStorage.setItem("dark",document.body.classList.contains("dark"))
 }
-if(localStorage.getItem('dark')==='true'){document.body.classList.add('dark');document.getElementById('darkToggle').classList.add('active')}
+if(localStorage.getItem("dark")==="true"){document.body.classList.add("dark");document.getElementById("darkToggle").classList.add("active")}
 
-function filterCat(cat){
-  document.querySelectorAll('.filter-btn').forEach(function(x){x.classList.remove('active')});
-  document.querySelectorAll('.filter-btn[data-cat="'+cat+'"]').forEach(function(x){x.classList.add('active')});
-  document.querySelectorAll('.card').forEach(function(c){
-    c.style.display=c.getAttribute('data-category')===cat?'':'none'
-  });
-  document.querySelectorAll('.news-grid').forEach(function(g){
-    var vis=Array.from(g.querySelectorAll('.card')).some(function(c){return c.style.display!=='none'});
-    g.parentElement.querySelector('.section-title').style.display=vis?'':'none';
-    g.style.display=vis?'':'none';
+// ===== Category fallback images =====
+var CAT_IMAGES = {
+  "AI": "linear-gradient(135deg,#667eea,#764ba2)",
+  "科技": "linear-gradient(135deg,#3b82f6,#1d4ed8)",
+  "综合": "linear-gradient(135deg,#f97316,#ea580c)",
+  "财经": "linear-gradient(135deg,#10b981,#047857)",
+};
+function fallbackImg(cat) {
+  var g = CAT_IMAGES[cat] || "linear-gradient(135deg,#64748b,#475569)";
+  return "<div class=card-img-fallback style=background:"+g+">&#x26A1;</div>";
+}
+
+// ===== Date loading =====
+var allDates = {{ all_dates|safe }};
+function scrollToTop() { window.scrollTo({top:0,behavior:"smooth"}); }
+
+function loadDate(date) {
+  document.querySelectorAll(".date-nav-item").forEach(function(b){b.classList.remove("active")});
+  document.querySelector("[data-date='"+date+"']").classList.add("active");
+  document.getElementById("newsContainer").innerHTML = "<div style='text-align:center;padding:40px;color:var(--gray-400)' data-i18n='load_earlier'>加载中...</div>";
+  applyLang();
+  fetch("data/"+date+".json").then(function(r){return r.json()}).then(function(items){
+    renderNews(items, date);
+  }).catch(function(){
+    document.getElementById("newsContainer").innerHTML = "<div style='text-align:center;padding:40px;color:var(--gray-400)'>No news for "+date+"</div>";
   });
 }
-function filterAll(){
-  document.querySelectorAll('.filter-btn').forEach(function(x){x.classList.remove('active')});
-  document.querySelectorAll('.filter-btn[data-cat-all]').forEach(function(x){x.classList.add('active')});
-  document.querySelectorAll('.card').forEach(function(c){c.style.display=''});
-  document.querySelectorAll('.section-title').forEach(function(s){s.style.display=''});
-  document.querySelectorAll('.news-grid').forEach(function(g){g.style.display=''});
+
+function renderNews(items, date) {
+  var groups = {};
+  items.forEach(function(item){
+    var cat = item.category || "综合";
+    if (!groups[cat]) groups[cat] = [];
+    groups[cat].push(item);
+  });
+  var order = ["AI","科技","综合","财经"];
+  var html = "";
+  order.forEach(function(cat){
+    if (!groups[cat] || groups[cat].length===0) return;
+    html += "<h2 class=section-title data-section=\""+cat+"\">"+cat+" <span class=badge>"+groups[cat].length+" "+t("items_count")+"</span></h2>";
+    html += "<div class=news-grid>";
+    groups[cat].forEach(function(item){
+      var imgHtml = item.image_url
+        ? "<img src=\""+item.image_url+"\" alt=\"\" loading=lazy onerror=\"this.parentElement.innerHTML=fallbackImg('"+cat+"')\">"
+        : fallbackImg(cat);
+      var videoHtml = item.has_video ? "<span class=card-video-badge>&#x25B6; "+t("video")+"</span>" : "";
+      var titleEn = (item.title_en && item.title_en !== item.title) ? "<div class=card-title-en>"+item.title_en+"</div>" : "";
+      var summaryHtml = item.summary ? "<p class=card-summary>"+item.summary+"</p>" : "";
+      html += "<article class=card data-category=\""+cat+"\">";
+      html += "<div class=card-img-wrap>"+imgHtml+videoHtml+"<span class=card-source>"+item.source+"</span></div>";
+      html += "<div class=card-body>";
+      html += "<div class=card-meta><span class=card-category>"+cat+"</span></div>";
+      html += "<h3 class=card-title><a href=\""+item.url+"\" target=_blank rel=noopener>"+item.title+"</a></h3>";
+      html += titleEn + summaryHtml;
+      html += "<div class=card-footer><span class=card-source-label>via "+item.source+"</span><a href=\""+item.url+"\" class=card-link target=_blank rel=noopener>"+t("read_original")+" &rarr;</a></div>";
+      html += "</div></article>";
+    });
+    html += "</div>";
+  });
+  document.getElementById("newsContainer").innerHTML = html;
+  applyLang();
 }
+
+// ===== Filter =====
+function filterCat(cat) {
+  document.querySelectorAll(".filter-btn").forEach(function(b){b.classList.remove("active")});
+  if (cat === "all") {
+    document.querySelectorAll(".filter-btn[data-cat=all]").forEach(function(b){b.classList.add("active")});
+    document.querySelectorAll(".card").forEach(function(c){c.style.display=""});
+    document.querySelectorAll(".section-title").forEach(function(s){s.style.display=""});
+    document.querySelectorAll(".news-grid").forEach(function(g){g.style.display=""});
+    return;
+  }
+  document.querySelectorAll(".filter-btn[data-cat='"+cat+"']").forEach(function(b){b.classList.add("active")});
+  document.querySelectorAll(".card").forEach(function(c){
+    c.style.display=c.getAttribute("data-category")===cat?"":"none";
+  });
+  document.querySelectorAll(".section-title").forEach(function(s){
+    var grid = document.querySelector(".news-grid[data-section='"+s.getAttribute("data-section")+"']");
+    var visible = grid && Array.from(grid.querySelectorAll(".card")).some(function(c){return c.style.display!=="none"});
+    s.style.display=visible?"":"none";
+    if(grid) grid.style.display=visible?"":"none";
+  });
+}
+
+// ===== Keyword Trend Chart =====
+var trendData = {{ trends|safe }};
+function drawTrend() {
+  var canvas = document.getElementById("trendChart");
+  if (!canvas || !trendData.series || trendData.series.length===0) return;
+  var ctx = canvas.getContext("2d");
+  var rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = canvas.parentElement.clientWidth * (window.devicePixelRatio||1);
+  canvas.height = 200 * (window.devicePixelRatio||1);
+  ctx.scale(window.devicePixelRatio||1, window.devicePixelRatio||1);
+  var w = canvas.parentElement.clientWidth;
+  var h = 200;
+  var pad = {top:10,right:20,bottom:24,left:36};
+  var chartW = w - pad.left - pad.right;
+  var chartH = h - pad.top - pad.bottom;
+  var dates = trendData.dates;
+  if (dates.length < 2) { return; }
+  var colors = ["#3b82f6","#ef4444","#10b981","#f59e0b","#8b5cf6","#ec4899","#14b8a6","#f97316","#6366f1","#06b6d4","#84cc16","#d946ef","#0ea5e9","#e11d48","#65a30d"];
+
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle = getComputedStyle(document.body).getPropertyValue("--gray-200") || "#e2e8f0";
+  ctx.strokeStyle = ctx.fillStyle;
+  ctx.lineWidth = 1;
+  // Grid lines
+  ctx.font = "11px Inter,sans-serif";
+  ctx.fillStyle = getComputedStyle(document.body).getPropertyValue("--gray-400") || "#94a3b8";
+
+  var maxVal = 0;
+  trendData.series.forEach(function(s){
+    s.points.forEach(function(p){if(p.value>maxVal)maxVal=p.value});
+  });
+  maxVal = Math.max(maxVal, 3);
+
+  // Y axis
+  for (var y=0; y<=maxVal; y+=Math.max(1,Math.floor(maxVal/4))) {
+    var yPos = pad.top + chartH - (y/maxVal)*chartH;
+    ctx.beginPath(); ctx.moveTo(pad.left,yPos); ctx.lineTo(w-pad.right,yPos); ctx.stroke();
+    ctx.fillText(y, 4, yPos+4);
+  }
+
+  // Draw series
+  trendData.series.forEach(function(series, idx){
+    var color = colors[idx % colors.length];
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    series.points.forEach(function(p, i){
+      var x = pad.left + (i/(dates.length-1))*chartW;
+      var y = pad.top + chartH - (p.value/maxVal)*chartH;
+      if (i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    });
+    ctx.stroke();
+
+    // Dots
+    series.points.forEach(function(p, i){
+      var x = pad.left + (i/(dates.length-1))*chartW;
+      var y = pad.top + chartH - (p.value/maxVal)*chartH;
+      ctx.beginPath(); ctx.arc(x,y,3,0,Math.PI*2); ctx.fillStyle=color; ctx.fill();
+    });
+  });
+
+  // X axis labels
+  ctx.fillStyle = getComputedStyle(document.body).getPropertyValue("--gray-400") || "#94a3b8";
+  dates.forEach(function(d,i){
+    if (i===0 || i===dates.length-1 || i%Math.max(1,Math.floor(dates.length/5))===0) {
+      var x = pad.left + (i/(dates.length-1))*chartW;
+      ctx.fillText(d.slice(5), x-12, h-6);
+    }
+  });
+
+  // Legend
+  var legendHtml = "";
+  trendData.series.forEach(function(s, idx){
+    var color = colors[idx % colors.length];
+    legendHtml += "<span class=trend-legend-item onclick=toggleTrendLine("+idx+")><span class=dot style=background:"+color+"></span>"+s.keyword+"</span>";
+  });
+  document.getElementById("trendLegend").innerHTML = legendHtml;
+}
+
+var trendHidden = {};
+function toggleTrendLine(idx) {
+  // Simple hide/show - redraw without hidden
+  trendHidden[idx] = !trendHidden[idx];
+  drawTrend();
+}
+
+// ===== Time ago =====
+function updateDates() {
+  document.querySelectorAll("[data-iso]").forEach(function(el){
+    var iso = el.getAttribute("data-iso");
+    if (!iso) return;
+    var dt = new Date(iso);
+    var now = new Date();
+    var diff = (now - dt) / 1000;
+    var h = Math.floor(diff / 3600);
+    if (h < 1) { var m = Math.floor(diff/60); el.textContent = m > 0 ? m + " "+t("minutes_ago") : t("just_now"); }
+    else if (h < 24) { el.textContent = h + " "+t("hours_ago"); }
+    else { el.textContent = Math.floor(h/24) + " "+t("days_ago"); }
+  });
+}
+
+// ===== Init =====
+applyLang();
+updateDates();
+drawTrend();
+window.addEventListener("resize", drawTrend);
 </script>
-
 </body>
 </html>
