@@ -139,6 +139,11 @@ def fallback_img(category):
     img = CATEGORY_IMAGES.get(category, {"gradient": "linear-gradient(135deg,#64748b,#475569)", "icon": "general"})
     return "<div class=\"card-img-fallback\" style=\"background:" + img["gradient"] + "\">&#x26A1;</div>"
 
+def cat_gradient(category):
+    img = CATEGORY_IMAGES.get(category, {"gradient": "linear-gradient(135deg,#64748b,#475569)", "icon": "general"})
+    return img["gradient"]
+
+
 
 def source_logo(sid):
     return SOURCE_LOGOS.get(sid, "")
@@ -269,6 +274,7 @@ def build():
 
     env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))
     env.filters["time_ago"] = time_ago
+    env.globals["cat_gradient"] = cat_gradient
     env.globals["fallback_img"] = fallback_img
     env.globals["source_logo"] = source_logo
 
