@@ -68,7 +68,7 @@ def categorize_items(items):
     result = []
     for cat in CATEGORY_ORDER:
         if groups[cat]:
-            result.append({"name": cat, "items": groups[cat]})
+            result.append({"name": cat, "articles": groups[cat]})
     return result
 
 

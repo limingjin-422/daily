@@ -175,9 +175,9 @@ def fetch_reuters_tech(max_items: int = 10):
     """Fetch from Reuters Technology RSS."""
     items = []
     try:
-        feed = _fetch_feed("https://www.reutersagency.com/feed/?taxonomy=industry&post_type=bureau&industry=tech")
+        feed = _fetch_feed("https://www.reuters.com/technology/arc/outboundfeeds/rss/")
         if not feed.entries:
-            feed = _fetch_feed("https://www.reuters.com/tools/rss/technology-news")
+            feed = _fetch_feed("https://www.reuters.com/technology/arc/outboundfeeds/rss/")
         for entry in feed.entries[:max_items]:
             img = _rss_image(entry)
             items.append({
